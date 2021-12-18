@@ -5,44 +5,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Drum kits key</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="keys">
-      <div data-key="65" class="key">
-        <kbd>A</kbd>
-        <span class="sound">S&C3</span>
-      </div>
-      <div data-key="83" class="key">
-        <kbd>S</kbd>
-        <span class="sound">Percs10</span>
-      </div>
-      <div data-key="68" class="key">
-        <kbd>D</kbd>
-        <span class="sound">S&C6</span>
-      </div>
-      <div data-key="70" class="key">
-        <kbd>F</kbd>
-        <span class="sound">CTS_Kick2</span>
-      </div>
-      <div data-key="71" class="key">
-        <kbd>G</kbd>
-        <span class="sound">CTS_Kick7</span>
-      </div>
-      <div data-key="72" class="key">
-        <kbd>H</kbd>
-        <span class="sound">S&C4</span>
-      </div>
-      <div data-key="74" class="key">
-        <kbd>J</kbd>
-        <span class="sound">S&C1</span>
-      </div>
-      <div data-key="75" class="key">
-        <kbd>K</kbd>
-        <span class="sound">S&C7</span>
-      </div>
-      <div data-key="76" class="key">
-        <kbd>L</kbd>
-        <span class="sound">S&C10</span>
+    <div class="bg">
+      <div class="keys">
+        <div data-key="65" class="key">
+          <kbd>A</kbd>
+        </div>
+        <div data-key="83" class="key">
+          <kbd>S</kbd>
+        </div>
+        <div data-key="68" class="key">
+          <kbd>D</kbd>
+        </div>
+        <div data-key="70" class="key">
+          <kbd>F</kbd>
+        </div>
+        <div data-key="71" class="key">
+          <kbd>G</kbd>
+        </div>
+        <div data-key="72" class="key">
+          <kbd>H</kbd>
+        </div>
+        <div data-key="74" class="key">
+          <kbd>J</kbd>
+        </div>
+        <div data-key="75" class="key">
+          <kbd>K</kbd>
+        </div>
+        <div data-key="76" class="key">
+          <kbd>L</kbd>
+        </div>
       </div>
     </div>
 
@@ -57,10 +51,27 @@
     <audio data-key="76" src="sounds/S&C10.wav"></audio>
 
     <script>
-      window.addEventListener("keydown", function (e) {
+      function playSound(e) {
         const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        console.log(audio);
-      });
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return; // stop the function.
+        audio.currentTime = 0; // rewind to the start if the same key was tapped.
+        audio.play();
+        key.classList.add("playing");
+      }
+
+      function removeTransition(e) {
+        if (e.propertyName !== "transform") return; //skip up.
+        this.classList.remove("playing"); // this = the element in the dom
+      }
+
+      // add style
+      const keys = document.querySelectorAll(".key");
+      //remove style
+      keys.forEach((key) =>
+        key.addEventListener("transitionend", removeTransition)
+      );
+      window.addEventListener("keydown", playSound);
     </script>
   </body>
 </html>
