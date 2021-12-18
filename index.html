@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drum kits key</title>
+  </head>
+  <body>
+    <div class="keys">
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">S&C3</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span class="sound">Percs10</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">S&C6</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">CTS_Kick2</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">CTS_Kick7</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">S&C4</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">S&C1</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">S&C7</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">S&C10</span>
+      </div>
+    </div>
+
+    <audio data-key="65" src="sounds/S&C3.wav"></audio>
+    <audio data-key="83" src="sounds/Percs10.WAV"></audio>
+    <audio data-key="68" src="sounds/S&C6.wav"></audio>
+    <audio data-key="70" src="sounds/CTS_Kick2.wav"></audio>
+    <audio data-key="71" src="sounds/CTS_Kick7.wav"></audio>
+    <audio data-key="72" src="sounds/S&C4.wav"></audio>
+    <audio data-key="74" src="sounds/S&C1.wav"></audio>
+    <audio data-key="75" src="sounds/S&C7.wav"></audio>
+    <audio data-key="76" src="sounds/S&C10.wav"></audio>
+
+    <script>
+      window.addEventListener("keydown", function (e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        console.log(audio);
+      });
+    </script>
+  </body>
+</html>
